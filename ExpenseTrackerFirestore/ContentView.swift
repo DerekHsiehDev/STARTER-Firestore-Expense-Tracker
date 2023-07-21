@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("uid") var userID: String = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        if userID != "" {
+            
+            TabView {
+                ExpensesView()
+                    .tabItem {
+                        Image(systemName: "list.bullet")
+                        Text("Expenses")
+                    }
+                
+                
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "gearshape")
+                        Text("Settings")
+                    }
+            }
+        } else {
+            AuthView()
         }
-        .padding()
+        
+        
     }
 }
 
